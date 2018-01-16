@@ -24,7 +24,7 @@ namespace _1taskone
                     Console.WriteLine(q);
                     continue;
                 }
-                for (int i=2; i<=q/2; i++) // don't know why, but code doesn't want to work when I use Math.Sqrt
+                for (int i=2; i<=Math.Sqrt(q); i++) // don't know why, but code doesn't want to work when I use Math.Sqrt
                 {
                     if (q%i==0)
                     {

@@ -1,0 +1,7 @@
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\bin\Debug\3taskthree.exe.config
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\bin\Debug\3taskthree.exe
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\bin\Debug\3taskthree.pdb
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\obj\Debug\3taskthree.csprojResolveAssemblyReference.cache
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\obj\Debug\3taskthree.csproj.CoreCompileInputs.cache
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\obj\Debug\3taskthree.exe
+C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\3taskthree\3taskthree\obj\Debug\3taskthree.pdb
