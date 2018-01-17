@@ -14,6 +14,7 @@ namespace _3taskthree
             string[] s = text.Split();
             int[] n = new int[s.Length];
             int ans = 10000000;
+            string a;
             for (int i = 0; i < s.Length; i++)
             {
                 n[i] = int.Parse(s[i]);
@@ -27,8 +28,15 @@ namespace _3taskthree
                     if (i == (int)Math.Sqrt(k)) if (k < ans) ans = k;
                 }
             }
-            if (ans != 10000000) Console.WriteLine(ans);
-            else Console.WriteLine("There is no primes");
+            if (ans != 10000000)
+            {
+                a = ans.ToString();
+            }
+            else
+            {
+                a = "There are no primes";
+            }
+            System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\output.txt", a);
             Console.ReadKey();
         }
     }
