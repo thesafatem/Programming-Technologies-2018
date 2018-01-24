@@ -1,0 +1,7 @@
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\bin\Debug\2tasktwo.exe.config
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\bin\Debug\2tasktwo.exe
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\bin\Debug\2tasktwo.pdb
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\obj\Debug\2tasktwo.csprojResolveAssemblyReference.cache
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\obj\Debug\2tasktwo.csproj.CoreCompileInputs.cache
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\obj\Debug\2tasktwo.exe
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\2tasktwo\2tasktwo\obj\Debug\2tasktwo.pdb
