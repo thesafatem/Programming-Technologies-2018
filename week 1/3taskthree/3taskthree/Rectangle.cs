@@ -26,7 +26,7 @@ namespace _3taskthree
             FindArea();
             FindPerimeter();
         }
-        public Rectangle (int a)
+        public Rectangle(int a)
         {
             width = a;
             height = a;

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{28BC4CDA-EEB9-468C-933D-DA2C4B89BB3C}</ProjectGuid>
+    <ProjectGuid>{21CEEF84-7F7B-431E-B406-D9D5769F0E2A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_2tasktwo</RootNamespace>
-    <AssemblyName>2tasktwo</AssemblyName>
+    <RootNamespace>biginteger</RootNamespace>
+    <AssemblyName>biginteger</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

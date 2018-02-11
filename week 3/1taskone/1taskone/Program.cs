@@ -11,7 +11,7 @@ namespace _1taskone
     {
         static void ShowDirect(DirectoryInfo direct, int x)
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.BackgroundColor = ConsoleColor.White;
             Console.Clear();
             FileSystemInfo[] fild = direct.GetFileSystemInfos();
             for (int i = 0; i < fild.Length; i++)
@@ -23,15 +23,15 @@ namespace _1taskone
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.BackgroundColor = ConsoleColor.White;
                 }
                 if (fild[i].GetType() == typeof(DirectoryInfo))
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.ForegroundColor = ConsoleColor.Red;
                 }
                 Console.WriteLine(fild[i].Name);
             }
@@ -44,48 +44,58 @@ namespace _1taskone
             ShowDirect(dir, cursor);
             while (true)
             {
-                Console.CursorVisible = false;
-                ConsoleKeyInfo button = Console.ReadKey();
-                if (button.Key == ConsoleKey.UpArrow)
+                try
                 {
-                    cursor--;
-                    if (cursor < 0) cursor = limit - 1;
-                }
-                if (button.Key == ConsoleKey.DownArrow)
-                {
-                    cursor++;
-                    if (cursor == limit) cursor = 0;
-                }
-                if (button.Key == ConsoleKey.Enter)
-                {
-                    if (dir.GetFileSystemInfos()[cursor].GetType() != typeof(FileInfo))
+                    Console.CursorVisible = false;
+                    ConsoleKeyInfo button = Console.ReadKey();
+                    if (button.Key == ConsoleKey.UpArrow)
                     {
-                        dir = new DirectoryInfo(dir.GetFileSystemInfos()[cursor].FullName);
-                        cursor = 0;
-                        limit = dir.GetFileSystemInfos().Length;
+                        cursor--;
+                        if (cursor < 0) cursor = limit - 1;
                     }
-                    else
+                    if (button.Key == ConsoleKey.DownArrow)
                     {
-                        StreamReader read = new StreamReader(dir.GetFileSystemInfos()[cursor].FullName);
-                        string output = read.ReadToEnd();
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Clear();
-                        Console.WriteLine(output);
-                        Console.ReadKey();
+                        cursor++;
+                        if (cursor == limit) cursor = 0;
                     }
+                    if (button.Key == ConsoleKey.Enter)
+                    {
+                        if (dir.GetFileSystemInfos()[cursor].GetType() != typeof(FileInfo))
+                        {
+                            dir = new DirectoryInfo(dir.GetFileSystemInfos()[cursor].FullName);
+                            cursor = 0;
+                            limit = dir.GetFileSystemInfos().Length;
+                        }
+                        else
+                        {
+                            StreamReader read = new StreamReader(dir.GetFileSystemInfos()[cursor].FullName);
+                            string output = read.ReadToEnd();
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Clear();
+                            Console.WriteLine(output);
+                            Console.ReadKey();
+                        }
+                    }
+                    if (button.Key == ConsoleKey.Escape)
+                    {
+                        if (dir.Parent != null)
+                        {
+                            dir = dir.Parent;
+                            cursor = 0;
+                            limit = dir.GetFileSystemInfos().Length;
+                        }
+                        else break;
+                    }
+                    ShowDirect(dir, cursor);
                 }
-                if (button.Key == ConsoleKey.Escape)
+                catch (Exception e)
                 {
-                    if (dir.Parent != null)
-                    {
-                        dir = dir.Parent;
-                        cursor = 0;
-                        limit = dir.GetFileSystemInfos().Length;
-                    }
-                    else break;
+                    Console.Clear();
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(e);
                 }
-                ShowDirect(dir, cursor);
             }
         }
     }

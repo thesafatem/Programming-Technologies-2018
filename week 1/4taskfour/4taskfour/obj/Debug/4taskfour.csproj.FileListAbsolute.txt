@@ -4,3 +4,9 @@ C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\bin\Debug\4taskfour
 C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.csproj.CoreCompileInputs.cache
 C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.exe
 C:\KBTU\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.pdb
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\bin\Debug\4taskfour.exe.config
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\bin\Debug\4taskfour.exe
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\bin\Debug\4taskfour.pdb
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.csproj.CoreCompileInputs.cache
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.exe
+C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 1\4taskfour\4taskfour\obj\Debug\4taskfour.pdb

@@ -2,9 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\week 1",
+    "\\week 1\\1taskone\\1taskone",
+    "\\week 1\\2tasktwo",
     "\\week 1\\4taskfour",
-    "\\week 1\\4taskfour\\4taskfour"
+    "\\week 1\\4taskfour\\4taskfour",
+    "\\week 4",
+    "\\week 4\\SnakeGame",
+    "\\week 4\\SnakeGame\\SnakeGame"
   ],
-  "SelectedNode": "\\week 1\\4taskfour\\4taskfour\\Program.cs",
+  "SelectedNode": "\\week 1\\2tasktwo\\2tasktwo.sln",
   "PreviewInSolutionExplorer": false
 }

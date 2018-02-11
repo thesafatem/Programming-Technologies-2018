@@ -18,7 +18,6 @@ namespace _3taskthree
             for (int i = 0; i < s.Length; i++)
             {
                 n[i] = int.Parse(s[i]);
-                //Console.WriteLine(n[i]);
             }
             foreach (int k in n)
             {
@@ -36,6 +35,7 @@ namespace _3taskthree
             {
                 a = "There are no primes";
             }
+            Console.WriteLine(a);
             System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 2\output.txt", a);
             Console.ReadKey();
         }

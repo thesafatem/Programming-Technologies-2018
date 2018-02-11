@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace _4taskfour
 {
-    class Complex
+    public class Complex
     {
         public int a;
         public int b;
+        public Complex ()
+        {
+
+        }
         public Complex(int a, int b)
         {
             this.a = a;
