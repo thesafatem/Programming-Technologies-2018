@@ -12,6 +12,7 @@ namespace SnakeGame
         public static void Main(string[] args)
         {
             int level = 1;
+            int highscore = -1;
             Logic a = new Logic();
             Field f = new Field(level);
             Fruit fr = new Fruit(f, a);
@@ -76,34 +77,21 @@ namespace SnakeGame
 
                 if (a.Collisionwithbody() == true || a.Collisionwithobstacle(f) == true)
                 {
+                    if (highscore < score) highscore = score;
+                    string to = a.name;
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("GAME OVER");
                     Console.WriteLine("Your final score is " + score.ToString());
                     Console.WriteLine("Press R to restart or any other button to quit");
-                    if (Logic.occasion == 2)
-                    {
-                        System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + a.name + ".txt", score.ToString());
-                    }
-                    else
-                    {
-                        StreamReader sr = new StreamReader(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + a.name + ".txt");
-                        if (int.Parse(sr.ReadToEnd()) < score)
-                        {
-                            //System.IO.File.Delete(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + a.name + ".txt");
-                            //System.IO.File.Create(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + a.name + ".txt");
-                            System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + a.name + ".txt", score.ToString());
-                        }
-                    }
-                    Logic.occasion = 1;
                     ConsoleKeyInfo w = Console.ReadKey();
                     if (w.Key == ConsoleKey.R)
                     {
                         Console.Clear();
                         level = 1;
+                        f = new Field(level);
                         score = 0;
                         a = new Logic();
-                        f = new Field(level);
                         fr = new Fruit(f, a);
                         fr.MakeFood(f);
                         for (int i = 0; i < u.Length; i++)
@@ -120,6 +108,17 @@ namespace SnakeGame
                     }
                     else
                     {
+                        if (Logic.occasion == 2)
+                        {
+                            System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + to + ".txt", highscore.ToString());
+                        }
+                        else
+                        {
+                            if (a.compare < highscore)
+                            {
+                                System.IO.File.WriteAllText(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + to + ".txt", highscore.ToString());
+                            }
+                        }
                         break;
                     }
                 }

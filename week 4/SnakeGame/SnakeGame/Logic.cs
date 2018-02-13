@@ -13,7 +13,7 @@ namespace SnakeGame
         public string name;
         public static int occasion = 2;
         public string maxscore;
-
+        public int compare;
         public Logic()
         {
             body = new List<Point>();
@@ -24,7 +24,7 @@ namespace SnakeGame
             if (Collisionwithfruit(fr, f) != true)
             {
                 Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
-                Console.WriteLine(" ");
+                Console.Write(" ");
             }
             for (int i = body.Count - 1; i > 0; i--)
             {
@@ -68,7 +68,7 @@ namespace SnakeGame
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
                 Console.SetCursorPosition(p.x, p.y);
-                Console.WriteLine("o");
+                Console.Write("o");
                 cnt++;
             }
         }
@@ -78,13 +78,13 @@ namespace SnakeGame
             {
                 Console.SetCursorPosition(body[0].x, body[0].y);
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("o");
+                Console.Write("o");
                 Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("o");
+                Console.Write("o");
                 Console.SetCursorPosition(body[1].x, body[1].y);
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("o");
+                Console.Write("o");
             }
             else
             {
@@ -117,7 +117,6 @@ namespace SnakeGame
         }
         public void askme()
         {
-            int cnt = 0;
             string hello = "Please, enter your name to start the game";
             Console.WriteLine(hello);
             Console.CursorVisible = false;
@@ -130,7 +129,6 @@ namespace SnakeGame
             if (occasion == 2)
             {
                 Console.Clear();
-                System.IO.File.Create(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + name + ".txt");
                 Console.WriteLine("Hello, " + name + "!");
                 Console.WriteLine("Wow, it's your first play!");
                 Console.WriteLine("Good luck!");
@@ -140,9 +138,11 @@ namespace SnakeGame
                 Console.Clear();
                 StreamReader sr = new StreamReader(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + name + ".txt");
                 maxscore = sr.ReadToEnd();
+                compare = int.Parse(maxscore);
                 Console.WriteLine("Hello, " + name + "!");
                 Console.WriteLine("Wow, your previous maximal score is " + maxscore + "!");
                 Console.WriteLine("Good Luck!");
+                sr.Close();
             }
             Console.WriteLine("*Press any button to start*");
             Console.ReadKey();

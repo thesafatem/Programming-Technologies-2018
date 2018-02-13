@@ -58,6 +58,20 @@ namespace _1taskone
                         cursor++;
                         if (cursor == limit) cursor = 0;
                     }
+                    if (button.Key == ConsoleKey.F7)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please, enter the path");
+                        string path = Console.ReadLine();
+                        if (dir.GetFileSystemInfos()[cursor].GetType() == typeof(FileInfo))
+                        {
+                            System.IO.File.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
+                        }
+                        else
+                        {
+                            System.IO.Directory.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
+                        }
+                    }
                     if (button.Key == ConsoleKey.Enter)
                     {
                         if (dir.GetFileSystemInfos()[cursor].GetType() != typeof(FileInfo))

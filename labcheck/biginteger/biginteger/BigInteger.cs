@@ -185,15 +185,58 @@ namespace biginteger
         }
         public static BigInteger operator *(BigInteger a, BigInteger b)
         {
+            int signa;
+            int signb;
+            if (a.s[0] == '-' && b.s[0] == '-')
+            {
+                signa = 1;
+                signb = 1;
+                if (a.s[1] == '0' || b.s[1] == '0')
+                {
+                    BigInteger k = new BigInteger("0");
+                    return k;
+                }
+            }
+            else if (a.s[0] == '-')
+            {
+                signa = 1;
+                signb = 0;
+                if (a.s[1] == '0' || b.s[0] == '0')
+                {
+                    BigInteger k = new BigInteger("0");
+                    return k;
+                }
+            }
+            else if (b.s[0] == '-')
+            {
+                signa = 0;
+                signb = 1;
+                if (a.s[0] == '0' || b.s[1] == '0')
+                {
+                    BigInteger k = new BigInteger("0");
+                    return k;
+                }
+            }
+            else
+            {
+                signa = 0;
+                signb = 0;
+                if (a.s[0] == '0' || b.s[0] == '0')
+                {
+                    BigInteger k = new BigInteger("0");
+                    return k;
+                }
+            }
             BigInteger ans = new BigInteger("0");
             int c = 0;
             string zero = "";
-            for (int i = b.s.Length - 1; i >= 0; i--)
+            for (int i = b.s.Length - 1; i >= signb; i--)
             {
+                c = 0;
                 string add = "";
                 add += zero;
                 zero += '0';
-                for (int j = a.s.Length - 1; j >= 0; j--)
+                for (int j = a.s.Length - 1; j >= signa; j--)
                 {
                     add += (char)(((a.s[j] - 48) * (b.s[i] - 48) + c) % 10 + 48);
                     c = ((a.s[j] - 48) * (b.s[i] - 48) + c) / 10;
@@ -207,7 +250,12 @@ namespace biginteger
                 BigInteger plus = new BigInteger(k);
                 ans = ans + plus;
             }
-            return ans;
+            if ((signa == 1 && signb == 1) || (signa == 0 && signb == 0)) return ans;
+            else 
+            {
+                BigInteger k = new BigInteger(ans.s.Insert(0, "-"));
+                return k;
+            }
         }
         public override string ToString()
         {

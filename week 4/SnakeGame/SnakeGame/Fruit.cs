@@ -29,14 +29,9 @@ namespace SnakeGame
                         break;
                     }
                 }
-            }
-            yes = true;
-            while (yes)
-            {
-                yes = false;
                 foreach (Point p in Field.fild)
                 {
-                    if (p.x == _x && p.y == _y )
+                    if (p.x == _x && p.y == _y)
                     {
                         _x = x1.Next(1, f.columns - 2);
                         _y = y1.Next(1, f.k - 2);
