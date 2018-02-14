@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21CEEF84-7F7B-431E-B406-D9D5769F0E2A}</ProjectGuid>
+    <ProjectGuid>{04D7E48B-F2A0-40BB-8ABA-BFF57048E182}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>biginteger</RootNamespace>
-    <AssemblyName>biginteger</AssemblyName>
+    <RootNamespace>Billions</RootNamespace>
+    <AssemblyName>Billions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,15 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigInteger.cs" />
+    <Compile Include="Biginteger.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
