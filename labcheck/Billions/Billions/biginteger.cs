@@ -19,36 +19,62 @@ namespace Billions
         }
         public static Biginteger operator +(Biginteger a, Biginteger b)
         {
+            bool minus = false;
+            string f;
+            string h;
+            if (a.s[0] == '-' && b.s[0] == '-')
+            {
+                minus = true;
+                f = a.s.Remove(0, 1);
+                h = b.s.Remove(0, 1);
+            }
+            else if (a.s[0] == '-')
+            {
+                string l = a.s.Remove(0, 1);
+                Biginteger a2 = new Biginteger(l);
+                return b - a2;
+            }
+            else if (b.s[0] == '-')
+            {
+                string l = b.s.Remove(0, 1);
+                Biginteger b2 = new Biginteger(l);
+                return a - b2;
+            }
+            else
+            {
+                f = a.s;
+                h = b.s;
+            }
             int add = 0;
             string ans = "";
-            int[] aa = new int[Math.Max(a.s.Length, b.s.Length)];
-            int[] bb = new int[Math.Max(a.s.Length, b.s.Length)];
-            int[] cc = new int[Math.Max(a.s.Length, b.s.Length)];
+            int[] aa = new int[Math.Max(f.Length, h.Length)];
+            int[] bb = new int[Math.Max(f.Length, h.Length)];
+            int[] cc = new int[Math.Max(f.Length, h.Length)];
             for (int i = 0; i < aa.Length; i++)
             {
                 aa[i] = 0;
                 bb[i] = 0;
             }
-            if (a.s.Length >= b.s.Length)
+            if (f.Length >= h.Length)
             {
-                for (int i = 0; i < a.s.Length; i++)
+                for (int i = 0; i < f.Length; i++)
                 {
-                    aa[i] = a.s[i] - 48;
+                    aa[i] = f[i] - 48;
                 }
-                for (int i = a.s.Length - b.s.Length; i < a.s.Length; i++)
+                for (int i = f.Length - h.Length; i < f.Length; i++)
                 {
-                    bb[i] = b.s[i - a.s.Length + b.s.Length] - 48;
+                    bb[i] = h[i - f.Length + h.Length] - 48;
                 }
             }
             else
             {
-                for (int i = 0; i < b.s.Length; i++)
+                for (int i = 0; i < h.Length; i++)
                 {
-                    bb[i] = b.s[i] - 48;
+                    bb[i] = h[i] - 48;
                 }
-                for (int i = b.s.Length - a.s.Length; i < b.s.Length; i++)
+                for (int i = h.Length - f.Length; i < h.Length; i++)
                 {
-                    aa[i] = a.s[i - b.s.Length + a.s.Length] - 48;
+                    aa[i] = f[i - h.Length + f.Length] - 48;
                 }
             }
             for (int i = 0; i < aa.Length; i++)
@@ -65,11 +91,38 @@ namespace Billions
             {
                 ans += (char)(cc[i] + 48);
             }
+            if (minus == true)
+            {
+                ans = ans.Insert(0, "-");
+            }
             Biginteger x = new Biginteger(ans);
             return x;
         }
+
+
+
         public static Biginteger operator *(Biginteger a, Biginteger b)
         {
+            string f = a.s;
+            string h = b.s;
+            bool minus = false;
+            if (a.s[0] == '-' && b.s[0] == '-')
+            {
+                f = a.s.Remove(0, 1);
+                h = b.s.Remove(0, 1);
+            }
+            else if (a.s[0] == '-')
+            {
+                f = a.s.Remove(0, 1);
+                h = b.s;
+                minus = true;
+            }
+            else if (b.s[0] == '-')
+            {
+                h = b.s.Remove(0, 1);
+                f = a.s;
+                minus = true;
+            }
             if (a.s == "0" || b.s == "0")
             {
                 Biginteger q = new Biginteger("0");
@@ -77,16 +130,16 @@ namespace Billions
             }
             int add = 0;
             string ans = "";
-            int[] aa = new int[a.s.Length];
-            int[] bb = new int[b.s.Length];
-            int[] cc = new int[a.s.Length + b.s.Length];
-            for (int i = 0; i < a.s.Length; i++)
+            int[] aa = new int[f.Length];
+            int[] bb = new int[h.Length];
+            int[] cc = new int[f.Length + h.Length];
+            for (int i = 0; i < f.Length; i++)
             {
-                aa[i] = a.s[a.s.Length - 1 - i] - 48;
+                aa[i] = f[f.Length - 1 - i] - 48;
             }
-            for (int i = 0; i < b.s.Length; i++)
+            for (int i = 0; i < h.Length; i++)
             {
-                bb[i] = b.s[b.s.Length - 1 - i] - 48;
+                bb[i] = h[h.Length - 1 - i] - 48;
             }
             for (int i = 0; i < cc.Length; i++)
             {
@@ -104,7 +157,6 @@ namespace Billions
                 int k = cc[i];
                 cc[i] = (cc[i] + add) % 10;
                 add = (k + add) / 10;
-
             }
             for (int i = cc.Length - 1; i >= 0; i--)
             {
@@ -115,11 +167,35 @@ namespace Billions
                 if (ans[0] == '0') ans = ans.Remove(0, 1);
                 else break;
             }
+            if (minus == true) ans = ans.Insert(0, "-");
             Biginteger x = new Biginteger(ans);
             return x;
         }
+
+
+
         public static Biginteger operator -(Biginteger a, Biginteger b)
         {
+            if (a.s[0] == '-' && b.s[0] == '-')
+            {
+                string f = b.s.Remove(0, 1);
+                Biginteger bm2 = new Biginteger(f);
+                string h = a.s.Remove(0, 1);
+                Biginteger am2 = new Biginteger(h);
+                return bm2 - am2;
+            }
+            else if (a.s[0] == '-')
+            {
+                string f = b.s.Insert(0, "-");
+                Biginteger bm2 = new Biginteger(f);
+                return a + bm2;
+            }
+            else if (b.s[0] == '-')
+            {
+                string f = b.s.Remove(0, 1);
+                Biginteger bm2 = new Biginteger(f);
+                return a + bm2;
+            }
             string ans = "";
             bool minus = true;
             int start = 0;
@@ -185,7 +261,7 @@ namespace Billions
                 {
                     int k = cc[i];
                     cc[i] = (cc[i] + adder + 10) % 10;
-                    if (k < 0) adder = -1;
+                    if (k + adder < 0) adder = -1;
                     else adder = 0;
                 }
             }
@@ -216,6 +292,9 @@ namespace Billions
             Biginteger x = new Biginteger(ans);
             return x;
         }
+
+
+
         public override string ToString()
         {
             return s;
