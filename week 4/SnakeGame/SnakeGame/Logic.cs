@@ -7,6 +7,7 @@ using System.IO;
 
 namespace SnakeGame
 {
+    [Serializable]
     public class Logic
     {
         public List<Point> body;
@@ -21,11 +22,9 @@ namespace SnakeGame
         }
         public void Move(int ox, int oy, Field f, Fruit fr, Logic a)
         {
-            if (Collisionwithfruit(fr, f) != true)
-            {
-                Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
-                Console.Write(" ");
-            }
+            
+            Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
+            Console.Write(" ");
             for (int i = body.Count - 1; i > 0; i--)
             {
                 body[i].x = body[i - 1].x;
@@ -124,17 +123,6 @@ namespace SnakeGame
             if (File.Exists(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + name + ".txt") == true)
             {
                 occasion = 1;
-            }
-            else occasion = 2;
-            if (occasion == 2)
-            {
-                Console.Clear();
-                Console.WriteLine("Hello, " + name + "!");
-                Console.WriteLine("Wow, it's your first play!");
-                Console.WriteLine("Good luck!");
-            }
-            if (occasion == 1)
-            {
                 Console.Clear();
                 StreamReader sr = new StreamReader(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 4\" + name + ".txt");
                 maxscore = sr.ReadToEnd();
@@ -143,6 +131,14 @@ namespace SnakeGame
                 Console.WriteLine("Wow, your previous maximal score is " + maxscore + "!");
                 Console.WriteLine("Good Luck!");
                 sr.Close();
+            }
+            else
+            {
+                occasion = 2;
+                Console.Clear();
+                Console.WriteLine("Hello, " + name + "!");
+                Console.WriteLine("Wow, it's your first play!");
+                Console.WriteLine("Good luck!");
             }
             Console.WriteLine("*Press any button to start*");
             Console.ReadKey();

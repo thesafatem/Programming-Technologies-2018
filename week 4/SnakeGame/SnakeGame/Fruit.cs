@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     public class Fruit
     {
         public Point Food;
+        public Fruit()
+        {
+
+        }
         public Fruit(Field f, Logic a)
         {
             Random x1 = new Random();

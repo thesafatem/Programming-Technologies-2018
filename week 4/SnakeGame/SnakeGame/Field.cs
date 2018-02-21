@@ -8,14 +8,21 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     public class Field
     {
         public static List<Point> fild;
         string s;
         public int k;
         public int columns;
-        public Field (int level)
+        public static int level;
+        public Field()
         {
+
+        }
+        public Field (int q)
+        {
+            level = q;
             fild = new List<Point>();
             Dofield(level);
         }

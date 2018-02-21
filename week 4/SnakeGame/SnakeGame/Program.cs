@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace SnakeGame
 {
@@ -16,6 +17,7 @@ namespace SnakeGame
             Logic a = new Logic();
             Field f = new Field(level);
             Fruit fr = new Fruit(f, a);
+            Console.SetWindowSize(f.columns, f.k + 3);
             a.askme();
             Console.Clear();
             Console.CursorVisible = false;
@@ -36,7 +38,7 @@ namespace SnakeGame
                 Console.SetCursorPosition(0, f.k);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(u);
-                Console.WriteLine(z);
+                Console.Write(z);
                 if (a.Collisionwithfruit(fr, f) == true)
                 {
                     a.body.Add(new Point(0, 0));
@@ -73,6 +75,52 @@ namespace SnakeGame
                     a.Move(1, 0, f, fr, a);
                     a.Draw(1, 0);
                     exception = 4;
+                }
+                if (q.Key == ConsoleKey.S)
+                {
+                    if (File.Exists("savelogic.xml") == true)
+                    {
+                        File.Delete("savelogic.xml");
+                    }
+                    if (File.Exists("savefield.xml") == true)
+                    {
+                        File.Delete("savefield.xml");
+                    }
+                    if (File.Exists("savefruit.xml") == true)
+                    {
+                        File.Delete("savefruit.xml");
+                    }
+                    XmlSerializer savelogic = new XmlSerializer(typeof(Logic));
+                    FileStream fs = new FileStream("savelogic.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    savelogic.Serialize(fs, a);
+                    fs.Close();
+                    XmlSerializer savefield = new XmlSerializer(typeof(Field));
+                    FileStream fss = new FileStream("savefield.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    savefield.Serialize(fss, f);
+                    fss.Close();
+                    XmlSerializer savefruit = new XmlSerializer(typeof(Fruit));
+                    FileStream fsss = new FileStream("savefruit.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    savefruit.Serialize(fsss, fr);
+                    fsss.Close();
+                }
+                if (q.Key == ConsoleKey.L)
+                {
+                    XmlSerializer openlogic = new XmlSerializer(typeof(Logic));
+                    FileStream fs = new FileStream("savelogic.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    a = openlogic.Deserialize(fs) as Logic;
+                    XmlSerializer openfield = new XmlSerializer(typeof(Field));
+                    FileStream fss = new FileStream("savefield.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    f = openfield.Deserialize(fss) as Field;
+                    XmlSerializer openfruit = new XmlSerializer(typeof(Fruit));
+                    FileStream fsss = new FileStream("savefruit.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                    fr = openfruit.Deserialize(fsss) as Fruit;
+                    fs.Close();
+                    fss.Close();
+                    fsss.Close();
+                    Console.Clear();
+                    a.Draw();
+                    f.Draw();
+                    fr.MakeFood(f);
                 }
 
                 if (a.Collisionwithbody() == true || a.Collisionwithobstacle(f) == true)
@@ -124,8 +172,8 @@ namespace SnakeGame
                 }
                 if (a.body.Count % 15 == 0)
                 {
-                    level++;
-                    f = new Field(level);
+                    Field.level++;
+                    f = new Field(Field.level);
                     a = new Logic();
                     fr = new Fruit(f, a);
                     Console.Clear();
@@ -137,7 +185,7 @@ namespace SnakeGame
                         Console.SetCursorPosition(i, f.k + 1);
                         Console.Write(" ");
                     }
-                    z = "Level: " + level.ToString();
+                    z = "Level: " + Field.level.ToString();
                     Console.SetCursorPosition(0, f.k + 1);
                     Console.WriteLine(z);
                 }
