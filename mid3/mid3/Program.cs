@@ -12,10 +12,18 @@ namespace mid3
         static void Main(string[] args)
         {
             string path = Console.ReadLine();
-            DirectoryInfo fil = new FileInfo(path);
-            FileInfo [] d = fil.G
-            foreach(var v in dir)
-            
+            DirectoryInfo dir = new DirectoryInfo(path);
+            FileSystemInfo[] fil = dir.GetFileSystemInfos();
+            Console.Clear();
+            foreach (var v in fil)
+            {
+                if (v.GetType() == typeof(FileInfo) && v.FullName.Contains("fit"))
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine(v.Name);
+                }
+            }
+            Console.ReadKey();
         }
     }
 }
