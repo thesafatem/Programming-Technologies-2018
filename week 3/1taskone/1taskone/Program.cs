@@ -65,11 +65,11 @@ namespace _1taskone
                         string path = Console.ReadLine();
                         if (dir.GetFileSystemInfos()[cursor].GetType() == typeof(FileInfo))
                         {
-                            System.IO.File.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
+                            File.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
                         }
                         else
                         {
-                            System.IO.Directory.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
+                            Directory.Move(dir.GetFileSystemInfos()[cursor].FullName, path);
                         }
                     }
                     if (button.Key == ConsoleKey.Enter)

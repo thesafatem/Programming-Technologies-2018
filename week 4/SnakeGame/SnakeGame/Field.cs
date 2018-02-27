@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace SnakeGame
 {
     [Serializable]
+
     public class Field
     {
         public static List<Point> fild;
