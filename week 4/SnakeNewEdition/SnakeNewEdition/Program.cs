@@ -48,27 +48,6 @@ namespace SnakeNewEdition
                             snake.Move(1, 0);
                         }
                         break;
-                    /*case 5:
-                        level.Serialize(level);
-                        score.Serialize(score);
-                        snake.Serialize(snake);
-                        wall.Serialize(wall);
-                        fruit.Serialize(fruit);
-                        break;
-                    case 6:
-                        level.Deserialize();
-                        score.Deserialize();
-                        snake.Deserialize();
-                        wall.Deserialize();
-                        fruit.Deserialize();
-                        Console.Clear();
-                        level.Draw();
-                        score.Draw();
-                        snake.Draw();
-                        wall.Draw();
-                        fruit.Draw();
-                        break;*/
-
                 }
 
                 snake.Draw();
@@ -107,8 +86,67 @@ namespace SnakeNewEdition
         {
             Console.SetWindowSize(62, 23);
             Console.CursorVisible = false;
-            wall.Make(level);
-            fruit.Make(snake, wall);
+            Console.Clear();
+
+            Menu menu = new Menu();
+            int cursor = 0;
+            menu.Draw(cursor);
+            while(true)
+            {
+                ConsoleKeyInfo kek = Console.ReadKey();
+                if (kek.Key == ConsoleKey.UpArrow)
+                {
+                    cursor--;
+                    menu.Draw(cursor);
+                }
+                if (kek.Key == ConsoleKey.DownArrow)
+                {
+                    cursor++;
+                    menu.Draw(cursor);
+                }
+                if (kek.Key == ConsoleKey.Enter)
+                {
+                    if (cursor % 4 == 0)
+                    {
+                        menu.Hello();
+                        Console.Clear();
+                        wall.Make(level);
+                        fruit.Make(snake, wall);
+                        level.Draw();
+                        score.Draw();
+                        break;
+                    }
+                    if (cursor % 4 == 1)
+                    {
+                        Console.Clear();
+                        level = level.Deserialize();
+                        score = score.Deserialize();
+                        snake = snake.Deserialize();
+                        wall = wall.Deserialize();
+                        fruit = fruit.Deserialize();
+                        level.Draw();
+                        score.Draw();
+                        snake.Draw();
+                        wall.Draw();
+                        fruit.Draw();
+                        break;
+                    }
+                    if (cursor % 4 == 2)
+                    {
+                        Console.Clear();
+                        menu.Score();
+                        Console.ReadKey();
+                        Console.Clear();
+                        menu.Draw(cursor);
+                    }
+                    if (cursor % 4 == 3)
+                    {
+                        gameover = true;
+                        break;
+                    }
+                }
+            }
+            
             Thread thread = new Thread(Threadgame);
             thread.Start();
 
@@ -153,6 +191,7 @@ namespace SnakeNewEdition
                         thread.Start();
                         break;
                 }
+                Thread.Sleep(30);
             }
         }
     }

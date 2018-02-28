@@ -19,7 +19,6 @@ namespace SnakeNewEdition
         {
             score = 0;
             color = ConsoleColor.DarkGreen;
-            Draw();
         }
 
         public void Draw()
