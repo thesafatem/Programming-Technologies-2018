@@ -1,15 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\labcheck",
     "\\labcheck\\Billions",
-    "\\mid3",
-    "\\mid3\\mid3",
+    "\\midterm",
+    "\\midterm\\mid1\\mid1",
+    "\\midterm\\mid2\\mid2",
+    "\\midterm\\mid4\\mid4",
     "\\week 1",
     "\\week 4",
     "\\week 4\\SnakeNewEdition",
     "\\week 4\\SnakeNewEdition\\SnakeNewEdition"
   ],
-  "SelectedNode": "\\mid3\\mid3.sln",
+  "SelectedNode": "\\week 4\\SnakeNewEdition\\SnakeNewEdition.sln",
   "PreviewInSolutionExplorer": false
 }

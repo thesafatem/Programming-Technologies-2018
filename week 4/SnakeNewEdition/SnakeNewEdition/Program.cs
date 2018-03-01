@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,9 +18,11 @@ namespace SnakeNewEdition
         static Level level = new Level();
         static Score score = new Score();
         public static int speed = 150;
+        static Menu menu = new Menu();
 
         static void Threadgame()
         {
+
             while (!gameover)
             {
                 switch (direction)
@@ -55,11 +58,14 @@ namespace SnakeNewEdition
 
                 if (snake.Collision(snake, wall))
                 {
-                    gameover = true;
+                    menu.Rewrite(score);
+                    menu.Serialize(menu);
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.SetCursorPosition(26, 10);
+                    Console.SetCursorPosition(26, 7);
                     Console.WriteLine("GAME OVER");
+                    gameover = true;
+                    break;
                 }
                 if (snake.Eat(fruit))
                 {
@@ -87,11 +93,16 @@ namespace SnakeNewEdition
             Console.SetWindowSize(62, 23);
             Console.CursorVisible = false;
             Console.Clear();
+            
+            if (File.Exists("savemenu.xml") == true)
+            {
+                menu = menu.Deserialize();
+            }
 
-            Menu menu = new Menu();
+            Console.Clear();
             int cursor = 0;
             menu.Draw(cursor);
-            while(true)
+            while (true)
             {
                 ConsoleKeyInfo kek = Console.ReadKey();
                 if (kek.Key == ConsoleKey.UpArrow)
@@ -146,7 +157,7 @@ namespace SnakeNewEdition
                     }
                 }
             }
-            
+
             Thread thread = new Thread(Threadgame);
             thread.Start();
 

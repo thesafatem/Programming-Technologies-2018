@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace SnakeNewEdition
 {
@@ -12,9 +14,9 @@ namespace SnakeNewEdition
     {
         public string[] scoreboard;
         string[] print = new string[4];
+        string[] end = new string[2];
         public ConsoleColor color;
         public string name;
-
         public Menu()
         {
             scoreboard = new string[5];
@@ -27,6 +29,8 @@ namespace SnakeNewEdition
             print[1] = "Load Game";
             print[2] = "Scoreboard";
             print[3] = "Exit";
+            end[0] = "Main Menu";
+            end[1] = "Exit";
 
         }
 
@@ -35,7 +39,7 @@ namespace SnakeNewEdition
             Console.ForegroundColor = color;
             for (int i = 0; i < 4; i++)
             {
-                Console.SetCursorPosition(26, 7+i);
+                Console.SetCursorPosition(26, 7 + i);
                 if (i == cursor % 4)
                 {
                     Console.BackgroundColor = ConsoleColor.White; 
@@ -66,6 +70,44 @@ namespace SnakeNewEdition
             Console.WriteLine("Enter your name");
             Console.SetCursorPosition(26, 12);
             name = Console.ReadLine();
+        }
+
+        public void Rewrite(Score score)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                string[] s = scoreboard[i].Split(' ');
+                if (score.score > int.Parse(s[1]))
+                {
+                    for (int j = 4; j > i; j--)
+                    {
+                        scoreboard[j] = scoreboard[j - 1];
+                    }
+                    scoreboard[i] = name + " " + score.score.ToString();
+                    break;
+                }
+            }
+        }
+
+        public void Serialize(Menu menu)
+        {
+            if (File.Exists("savemenu.xml") == true)
+            {
+                File.Delete("savemenu.xml");
+            }
+            XmlSerializer save = new XmlSerializer(typeof(Menu));
+            FileStream fs = new FileStream("savemenu.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            save.Serialize(fs, menu);
+            fs.Close();
+        }
+
+        public Menu Deserialize()
+        {
+            XmlSerializer open = new XmlSerializer(typeof(Menu));
+            FileStream fs = new FileStream("savemenu.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            Menu menu = open.Deserialize(fs) as Menu;
+            fs.Close();
+            return menu;
         }
     }
 }
