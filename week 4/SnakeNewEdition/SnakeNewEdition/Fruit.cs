@@ -82,7 +82,6 @@ namespace SnakeNewEdition
             Fruit fruit = open.Deserialize(fs) as Fruit;
             fs.Close();
             return fruit;
-            //fruit.Draw();
         }
     }
 }

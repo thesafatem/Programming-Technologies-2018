@@ -1,0 +1,7 @@
+potato 150 50
+cheese 2000 30
+sgushenka 400 5
+sausages 500 15
+cheburek 120 25
+blinchiki 60 100
+baursak 50 200

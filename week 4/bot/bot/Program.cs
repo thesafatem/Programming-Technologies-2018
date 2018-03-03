@@ -10,7 +10,7 @@ namespace bot
     {
         static void Main(string[] args)
         {
-            bot
+
         }
     }
 }

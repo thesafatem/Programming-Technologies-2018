@@ -22,7 +22,6 @@ namespace SnakeNewEdition
             color = ConsoleColor.DarkYellow;
             body = new List<Point>();
             body.Add(new Point(1, 1));
-            Draw();
         }
 
         public void Move(int ox, int oy)

@@ -74,17 +74,46 @@ namespace SnakeNewEdition
 
         public void Rewrite(Score score)
         {
+            bool b = true;
             for (int i = 0; i < 4; i++)
             {
                 string[] s = scoreboard[i].Split(' ');
-                if (score.score > int.Parse(s[1]))
+                if (s[0] == name)
                 {
-                    for (int j = 4; j > i; j--)
+                    b = false;
+                    if (int.Parse(s[1]) < score.score)
                     {
-                        scoreboard[j] = scoreboard[j - 1];
+                        scoreboard[i] = name + " " + score.score.ToString();
+                        for (int j = 0; j < i; j++)
+                        {
+                            string[] h = scoreboard[j].Split(' ');
+                            if (int.Parse(s[1]) > int.Parse(h[1]))
+                            {
+                                for (int k = i; i > j; i--)
+                                {
+                                    scoreboard[k] = scoreboard[k - 1];
+                                }
+                                scoreboard[j] = name + " " + score.score.ToString();
+                            }
+                        }
                     }
-                    scoreboard[i] = name + " " + score.score.ToString();
                     break;
+                }
+            }
+            if (b)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    string[] s = scoreboard[i].Split(' ');
+                    if (score.score > int.Parse(s[1]))
+                    {
+                        for (int j = 4; j > i; j--)
+                        {
+                            scoreboard[j] = scoreboard[j - 1];
+                        }
+                        scoreboard[i] = name + " " + score.score.ToString();
+                        break;
+                    }
                 }
             }
         }
