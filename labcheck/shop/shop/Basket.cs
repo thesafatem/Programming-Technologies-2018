@@ -18,7 +18,6 @@ namespace shop
         {
             for (int i = 0; i < basket.Count; i++)
             {
-                //if (basket[i].amount == 0) continue;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (cursor == i)
                 {
@@ -48,10 +47,13 @@ namespace shop
             if (b) Catalog.shop.Add(new Product(basket[cursor].name, basket[cursor].cost, 1));
             basket[cursor].amount--;
             
-            /*if (basket[cursor].amount == 0)
+            if (basket[cursor].amount == 0)
             {
-                basket.Remove(basket[cursor]);
-            }*/
+                basket.RemoveAt(cursor);
+                cursor--;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.Clear();
+            }
         }
     }
 }
