@@ -10,6 +10,7 @@ namespace shop
     public class Catalog
     {
         public static List<Product> shop;
+        string[] k;
         public Catalog()
         {
             shop = new List<Product>();
@@ -26,17 +27,18 @@ namespace shop
             sr.Close();*/
             shop.Add(new Product("potato", 160, 30));
             shop.Add(new Product("cheese", 1600, 27));
-            shop.Add(new Product("bread", 80, 100));
+            shop.Add(new Product("bread", 80, 15));
+            k = new string[2];
+            k[0] = "Show Basket";
+            k[1] = "Add Product";
         }
 
         public void Menu(int cursor, int right)
         {
-            string[] k = new string[2];
-            k[0] = "Show Basket";
-            k[1] = "Add Product";
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             for (int i = 0; i < shop.Count; i++)
             {
+                //if (shop[i].amount == 0) continue;
                 if (cursor == i && right == 0)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
@@ -46,13 +48,13 @@ namespace shop
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
                 Console.SetCursorPosition(0, i);
-                Console.WriteLine(shop[i].all);
+                Console.WriteLine(shop[i].name + " " + shop[i].cost + " " + shop[i].amount);
             }
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
             for (int i = 0; i < 2; i++)
             {
-                if (cursor % 2 == 0 && right == 1)
+                if (cursor % 2 == i && right == 1)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                 }
@@ -60,14 +62,16 @@ namespace shop
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                Console.SetCursorPosition(40, i);
+                Console.SetCursorPosition(30, i);
                 Console.WriteLine(k[i]);
             }
         }
 
         public void Plus()
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Enter the information about product");
             string s = Console.ReadLine();
             string[] s1 = s.Split(' ');
@@ -89,6 +93,10 @@ namespace shop
             }
             if (b) Basket.basket.Add(new Product(shop[cursor].name, shop[cursor].cost, 1));
             shop[cursor].amount--;
+            /*if (shop[cursor].amount == 0)
+            {
+                shop.Remove(shop[cursor]);
+            }*/
         }
     }
 }

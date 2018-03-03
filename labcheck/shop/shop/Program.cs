@@ -28,7 +28,7 @@ namespace shop
                     {
                         case ConsoleKey.UpArrow:
                             cursor--;
-                            if (cursor < 1) cursor = Catalog.shop.Count - 1;
+                            if (cursor < 0) cursor = Catalog.shop.Count - 1;
                             catalog.Menu(cursor, right);
                             break;
                         case ConsoleKey.DownArrow:
@@ -69,7 +69,7 @@ namespace shop
                     {
                         case ConsoleKey.UpArrow:
                             cursor--;
-                            if (cursor < 1) cursor = Basket.basket.Count - 1;
+                            if (cursor < 0) cursor = Basket.basket.Count - 1;
                             basket.Menu(cursor);
                             break;
                         case ConsoleKey.DownArrow:
@@ -78,15 +78,21 @@ namespace shop
                             basket.Menu(cursor);
                             break;
                         case ConsoleKey.Escape:
-                            Console.Clear();
                             cursor = 0;
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Clear();
                             mod = 1;
+                            break;
+                        case ConsoleKey.Enter:
+                            basket.Delete(cursor);
                             break;
                     }
                 }
                 if (mod == 3)
                 {
                     catalog.Plus();
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Clear();
                     mod = 1;
                 }
             }
