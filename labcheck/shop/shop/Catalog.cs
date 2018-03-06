@@ -14,17 +14,6 @@ namespace shop
         public Catalog()
         {
             shop = new List<Product>();
-            /*FileStream fs = new FileStream(@"C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\labcheck\catalog.txt", FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
-            string d = sr.ReadToEnd();
-            string[] s = d.Split('\n');
-            foreach(var v in s)
-            {
-                string[] v1 = v.Split(' ');
-                shop.Add(new Product(v1[0], double.Parse(v1[1]), int.Parse(v1[2])));
-            }
-            fs.Close();
-            sr.Close();*/
             shop.Add(new Product("potato", 160, 30));
             shop.Add(new Product("cheese", 1600, 27));
             shop.Add(new Product("bread", 80, 15));
@@ -74,7 +63,7 @@ namespace shop
             Console.WriteLine("Enter the information about product");
             string s = Console.ReadLine();
             string[] s1 = s.Split(' ');
-            shop.Add(new Product(s1[0], double.Parse(s1[1]), int.Parse(s1[2])));
+            shop.Add(new Product(s1[0], int.Parse(s1[1]), int.Parse(s1[2])));
             Console.Clear();
         }
 
@@ -92,13 +81,7 @@ namespace shop
             }
             if (b) Basket.basket.Add(new Product(shop[cursor].name, shop[cursor].cost, 1));
             shop[cursor].amount--;
-            if (shop[cursor].amount == 0)
-            {
-                shop.RemoveAt(cursor);
-                cursor--;
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.Clear();
-            }
+            if (shop[cursor].amount == 9) Console.Clear();
         }
     }
 }

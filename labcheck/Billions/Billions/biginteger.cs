@@ -84,7 +84,7 @@ namespace Billions
             for (int i = cc.Length - 1; i >= 0; i--)
             {
                 cc[i] = (cc[i] + add) % 10;
-                add = (aa[i] + bb[i]) / 10;
+                add = (aa[i] + bb[i] + add) / 10;
             }
             if (add != 0) ans += (char)(add + 48);
             for (int i = 0; i < cc.Length; i++)

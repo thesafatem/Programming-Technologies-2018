@@ -13,11 +13,14 @@ namespace shop
         {
             Catalog catalog = new Catalog();
             Basket basket = new Basket();
+            Console.CursorVisible = false;
+            Console.WriteLine("Please, enter the amount of money that you would like to spend");
+            Money money = new Money(Console.ReadLine());
+            Console.Clear();
             bool active = true;
             int mod = 1;
             int cursor = 0;
             int right = 0;
-            Console.CursorVisible = false;
             while (active)
             {
                 if (mod == 1)
@@ -37,17 +40,31 @@ namespace shop
                             catalog.Menu(cursor, right);
                             break;
                         case ConsoleKey.Enter:
-                            if (right == 0) catalog.AddBasket(cursor);
+                            if (right == 0)
+                            {
+                                catalog.AddBasket(cursor);
+                                if (Catalog.shop[cursor].amount == 0 )
+                                {
+                                    Catalog.shop.RemoveAt(cursor);
+                                    cursor--;
+                                    if (cursor == -1) cursor = 0;
+                                    Console.Clear();
+                                }
+                            }
                             else if (cursor % 2 == 0)
                             {
                                 Console.Clear();
                                 cursor = 0;
+                                right = 0;
                                 mod = 2;
                             }
                             else
                             {
                                 mod = 3;
                             }
+                            break;
+                        case ConsoleKey.Escape:
+                            active = false;
                             break;
                         case ConsoleKey.LeftArrow:
                             right--;
@@ -63,28 +80,53 @@ namespace shop
                 }
                 if (mod == 2)
                 {
-                    basket.Menu(cursor);
+                    basket.Menu(cursor, right);
                     ConsoleKeyInfo key = Console.ReadKey();
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:
                             cursor--;
                             if (cursor < 0) cursor = Basket.basket.Count - 1;
-                            basket.Menu(cursor);
+                            basket.Menu(cursor, right);
                             break;
                         case ConsoleKey.DownArrow:
                             cursor++;
                             if (cursor == Basket.basket.Count) cursor = 0;
-                            basket.Menu(cursor);
+                            basket.Menu(cursor, right);
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            right--;
+                            if (right == -1) right = 1;
+                            basket.Menu(cursor, right);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            right++;
+                            if (right == 2) right = 0;
+                            basket.Menu(cursor, right);
                             break;
                         case ConsoleKey.Escape:
                             cursor = 0;
+                            right = 0;
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Clear();
                             mod = 1;
                             break;
                         case ConsoleKey.Enter:
-                            basket.Delete(cursor);
+                            if (right == 0)
+                            {
+                                basket.Delete(cursor);
+                                if (Basket.basket[cursor].amount == 0)
+                                {
+                                    Basket.basket.RemoveAt(cursor);
+                                    cursor--;
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                    Console.Clear();
+                                }
+                            }
+                            else
+                            {
+                                basket.Buy(money);
+                            }
                             break;
                     }
                 }
