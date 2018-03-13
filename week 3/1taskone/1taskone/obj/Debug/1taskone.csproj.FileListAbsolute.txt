@@ -1,7 +1,0 @@
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\bin\Debug\1taskone.exe.config
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\bin\Debug\1taskone.exe
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\bin\Debug\1taskone.pdb
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\obj\Debug\1taskone.csprojResolveAssemblyReference.cache
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\obj\Debug\1taskone.csproj.CoreCompileInputs.cache
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\obj\Debug\1taskone.exe
-C:\KBTU\COURSE I\SEMESTER II\PROGRAMMING PRINCIPLES II\week 3\1taskone\1taskone\obj\Debug\1taskone.pdb
