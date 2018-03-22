@@ -13,10 +13,14 @@ namespace Calculator
     public partial class Form1 : Form
     {
         Calc calc = new Calc();
+        public double memory = 0;
+
         public Form1()
         {
             InitializeComponent();
             textBox1.Text = "0";
+            Call_Memory.Enabled = false;
+            Clear_Memory.Enabled = false;
         }
 
         private void Enter_Numbers(object sender, EventArgs e)
@@ -124,6 +128,43 @@ namespace Calculator
         {
             calc = new Calc();
             textBox1.Text = "0";
+        }
+
+        private void Subtract_From_Memory_Click(object sender, EventArgs e)
+        {
+            memory -= double.Parse(textBox1.Text);
+            Call_Memory.Enabled = true;
+            Clear_Memory.Enabled = true;
+        }
+
+        private void Clear_Memory_Click(object sender, EventArgs e)
+        {
+            memory = 0;
+            Call_Memory.Enabled = false;
+            Clear_Memory.Enabled = false;
+        }
+
+        private void Call_Memory_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = memory.ToString();
+            if (calc.entermod == 1) calc.first = memory;
+            else calc.second = memory;
+            calc.complete = true;
+        }
+
+        private void Add_To_Memory_Click(object sender, EventArgs e)
+        {
+            memory += double.Parse(textBox1.Text);
+            Call_Memory.Enabled = true;
+            Clear_Memory.Enabled = true;
+        }
+
+        private void Save_To_Memory_Click(object sender, EventArgs e)
+        {
+            memory = double.Parse(textBox1.Text);
+            Call_Memory.Enabled = true;
+            Clear_Memory.Enabled = true;
+            calc.complete = true;
         }
     }
 }

@@ -41,6 +41,8 @@ namespace Calculator
             switch (operation)
             {
                 case "!":
+                    if (first < 0) error = "It is impossible";
+                    else result = fact((int)Math.Floor(Math.Round(first)));
                     break;
                 case "x^2":
                     result = first * first;
