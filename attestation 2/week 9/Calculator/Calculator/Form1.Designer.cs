@@ -57,14 +57,14 @@
             this.button26 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
+            this.Equal = new System.Windows.Forms.Button();
             this.point = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.change_sign = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.delete_last = new System.Windows.Forms.Button();
-            this.button35 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
+            this.C = new System.Windows.Forms.Button();
+            this.CE = new System.Windows.Forms.Button();
             this.button40 = new System.Windows.Forms.Button();
             this.button37 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
@@ -82,6 +82,7 @@
             this.textBox1.Size = new System.Drawing.Size(418, 54);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox1.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button1
             // 
@@ -92,6 +93,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "sqrt";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button2
             // 
@@ -102,6 +104,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "sqrt^x";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button3
             // 
@@ -112,6 +115,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "lnx";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button4
             // 
@@ -122,6 +126,7 @@
             this.button4.TabIndex = 4;
             this.button4.Text = "logxy";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button5
             // 
@@ -132,6 +137,7 @@
             this.button5.TabIndex = 8;
             this.button5.Text = "cotx";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button6
             // 
@@ -142,6 +148,7 @@
             this.button6.TabIndex = 7;
             this.button6.Text = "tanx";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button7
             // 
@@ -152,6 +159,7 @@
             this.button7.TabIndex = 6;
             this.button7.Text = "cosx";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button8
             // 
@@ -162,6 +170,7 @@
             this.button8.TabIndex = 5;
             this.button8.Text = "sinx";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button9
             // 
@@ -172,6 +181,7 @@
             this.button9.TabIndex = 12;
             this.button9.Text = "x^y";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button10
             // 
@@ -182,6 +192,7 @@
             this.button10.TabIndex = 11;
             this.button10.Text = "e^x";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button11
             // 
@@ -192,6 +203,7 @@
             this.button11.TabIndex = 10;
             this.button11.Text = "10^x";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button12
             // 
@@ -202,6 +214,7 @@
             this.button12.TabIndex = 9;
             this.button12.Text = "x^2";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button13
             // 
@@ -212,6 +225,7 @@
             this.button13.TabIndex = 16;
             this.button13.Text = "÷";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button14
             // 
@@ -222,6 +236,7 @@
             this.button14.TabIndex = 15;
             this.button14.Text = "mod";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button15
             // 
@@ -232,6 +247,7 @@
             this.button15.TabIndex = 14;
             this.button15.Text = "!";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.Mono_operations);
             // 
             // button16
             // 
@@ -242,6 +258,7 @@
             this.button16.TabIndex = 13;
             this.button16.Text = "%";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button17
             // 
@@ -252,6 +269,7 @@
             this.button17.TabIndex = 20;
             this.button17.Text = "х";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button18
             // 
@@ -295,6 +313,7 @@
             this.button21.TabIndex = 24;
             this.button21.Text = "-";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button22
             // 
@@ -338,6 +357,7 @@
             this.button25.TabIndex = 28;
             this.button25.Text = "+";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.Bi_operations);
             // 
             // button26
             // 
@@ -372,15 +392,16 @@
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.Enter_Numbers);
             // 
-            // button29
+            // Equal
             // 
-            this.button29.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button29.Location = new System.Drawing.Point(330, 441);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(100, 35);
-            this.button29.TabIndex = 32;
-            this.button29.Text = "=";
-            this.button29.UseVisualStyleBackColor = true;
+            this.Equal.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Equal.Location = new System.Drawing.Point(330, 441);
+            this.Equal.Name = "Equal";
+            this.Equal.Size = new System.Drawing.Size(100, 35);
+            this.Equal.TabIndex = 32;
+            this.Equal.Text = "=";
+            this.Equal.UseVisualStyleBackColor = true;
+            this.Equal.Click += new System.EventHandler(this.Equal_Click);
             // 
             // point
             // 
@@ -424,6 +445,7 @@
             this.button33.TabIndex = 36;
             this.button33.Text = "1/x";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.Mono_operations);
             // 
             // delete_last
             // 
@@ -436,25 +458,27 @@
             this.delete_last.UseVisualStyleBackColor = true;
             this.delete_last.Click += new System.EventHandler(this.delete_last_Click);
             // 
-            // button35
+            // C
             // 
-            this.button35.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button35.Location = new System.Drawing.Point(118, 113);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(100, 35);
-            this.button35.TabIndex = 34;
-            this.button35.Text = "C";
-            this.button35.UseVisualStyleBackColor = true;
+            this.C.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.C.Location = new System.Drawing.Point(118, 113);
+            this.C.Name = "C";
+            this.C.Size = new System.Drawing.Size(100, 35);
+            this.C.TabIndex = 34;
+            this.C.Text = "C";
+            this.C.UseVisualStyleBackColor = true;
+            this.C.Click += new System.EventHandler(this.C_Click);
             // 
-            // button36
+            // CE
             // 
-            this.button36.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button36.Location = new System.Drawing.Point(12, 113);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(100, 35);
-            this.button36.TabIndex = 33;
-            this.button36.Text = "CE";
-            this.button36.UseVisualStyleBackColor = true;
+            this.CE.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CE.Location = new System.Drawing.Point(12, 113);
+            this.CE.Name = "CE";
+            this.CE.Size = new System.Drawing.Size(100, 35);
+            this.CE.TabIndex = 33;
+            this.CE.Text = "CE";
+            this.CE.UseVisualStyleBackColor = true;
+            this.CE.Click += new System.EventHandler(this.CE_Click);
             // 
             // button40
             // 
@@ -518,9 +542,9 @@
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.delete_last);
-            this.Controls.Add(this.button35);
-            this.Controls.Add(this.button36);
-            this.Controls.Add(this.button29);
+            this.Controls.Add(this.C);
+            this.Controls.Add(this.CE);
+            this.Controls.Add(this.Equal);
             this.Controls.Add(this.point);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.change_sign);
@@ -589,14 +613,14 @@
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button Equal;
         private System.Windows.Forms.Button point;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button change_sign;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button delete_last;
-        private System.Windows.Forms.Button button35;
-        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button C;
+        private System.Windows.Forms.Button CE;
         private System.Windows.Forms.Button button40;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Button button38;
