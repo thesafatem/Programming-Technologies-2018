@@ -15,7 +15,8 @@ namespace Calculator
         public bool complete;
         public int entermod;
         public double result;
-        public string operation;
+        public string operationmono;
+        public string operationbi;
         public string error;
 
         public Calc()
@@ -25,61 +26,72 @@ namespace Calculator
             sec = false;
             complete = false;
             result = 0;
-            operation = "";
+            operationmono = "";
+            operationbi = "";
             error = "";
             entermod = 1;
         }
 
         int fact (int x)
         {
-            if (x != 1) return x * fact(x - 1);
+            if (x != 0) return x * fact(x - 1);
             else return 1;
         }
 
         public void Mono(string operation)
         {
+            double k;
+            if (entermod == 1) k = first;
+            else k = second;
             switch (operation)
             {
-                case "!":
-                    if (first < 0) error = "It is impossible";
-                    else result = fact((int)Math.Floor(Math.Round(first)));
+                case "x!":
+                    if (k < 0) error = "It is impossible";
+                    else
+                    {
+                        if (Math.Round(k) != k)
+                            result = Math.Sqrt(2 * Math.PI * first) * Math.Pow(first / Math.E, first);
+                        else result = (double)(fact((int)(k)));
+                    }
                     break;
                 case "x^2":
-                    result = first * first;
+                    result = k * k;
                     break;
                 case "10^x":
-                    result = Math.Pow(10, first);
+                    result = Math.Pow(10, k);
                     break;
                 case "e^x":
-                    result = Math.Exp(first);
+                    result = Math.Exp(k);
                     break;
                 case "sqrt":
-                    if (first >= 0) result = Math.Sqrt(first);
+                    if (k >= 0) result = Math.Sqrt(k);
                     else error = "It is impossible";
                     break;
                 case "lnx":
-                    if (first > 0) result = Math.Log(first);
+                    if (k > 0) result = Math.Log(k);
                     else error = "It is impossible";
                     break;
                 case "1/x":
-                    if (first != 0) result = 1 / first;
+                    if (k != 0) result = 1 / k;
                     else error = "It is impossible";
                     break;
                 case "sinx":
-                    result = Math.Sin(first);
+                    result = Math.Sin(k * Math.PI / 180);
                     break;
                 case "cosx":
-                    result = Math.Cos(first);
+                    result = Math.Cos(k * Math.PI / 180);
                     break;
                 case "tanx":
-                    if (Math.Cos(first) != 0) result = Math.Tan(first);
+                    if (Math.Cos(k * Math.PI / 180) != 0) result = Math.Tan(k * Math.PI / 180);
                     else error = "It is impossible";
                     break;
                 case "cotx":
-                    if (Math.Tan(first) != 0) result = 1 / Math.Tan(first);
+                    if (Math.Tan(k * Math.PI / 180) != 0) result = 1 / Math.Tan(k * Math.PI / 180);
                     else error = "It is impossible";
                     break;
             }
+            if (entermod == 1) first = result;
+            else second = result;
         }
 
         public void Bi(string operation)

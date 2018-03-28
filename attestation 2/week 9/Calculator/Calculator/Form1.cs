@@ -21,6 +21,7 @@ namespace Calculator
             textBox1.Text = "0";
             Call_Memory.Enabled = false;
             Clear_Memory.Enabled = false;
+            textBox1.Enabled = false;
         }
 
         private void Enter_Numbers(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace Calculator
                 calc.complete = false;
             }
             else textBox1.Text += b.Text;
-            if (calc.operation != "") calc.sec = true;
+            if (calc.operationbi != "") calc.sec = true;
             if (calc.entermod == 1)
             {
                 calc.first = double.Parse(textBox1.Text);
@@ -43,7 +44,7 @@ namespace Calculator
         private void change_sign_Click(object sender, EventArgs e)
         {
             textBox1.Text = (double.Parse(textBox1.Text) * (-1)).ToString();
-            if (calc.operation != "") calc.sec = true;
+            if (calc.operationbi != "") calc.sec = true;
             if (calc.entermod == 1) calc.first = double.Parse(textBox1.Text);
             else calc.second = double.Parse(textBox1.Text);
         }
@@ -66,25 +67,34 @@ namespace Calculator
         private void Mono_operations(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            calc.operation = b.Text;
-            calc.first = double.Parse(textBox1.Text);
-            calc.Mono(calc.operation);
+            calc.operationmono = b.Text;
+            calc.Mono(calc.operationmono);
             if (calc.error != "")
             {
                 textBox1.Text = calc.error;
                 calc.error = "";
             }
-            else textBox1.Text = calc.result.ToString();
+            else
+            {
+                textBox1.Text = calc.result.ToString();
+            }
             calc.complete = true;
         }
 
         private void Bi_operations(object sender, EventArgs e)
         {
-            calc.entermod = 2;
-            calc.second = calc.first;
-            if (calc.operation !=  "" && calc.sec == true)
+            if (calc.entermod == 1 && textBox1.Text.Contains(",") == true)
             {
-                calc.Bi(calc.operation);
+                while (textBox1.Text[textBox1.Text.Length - 1] == '0')
+                {
+                    textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+                }
+            }
+            calc.entermod = 2;
+            calc.second = double.Parse(textBox1.Text);
+            if (calc.operationbi !=  "" && calc.sec == true)
+            {
+                calc.Bi(calc.operationbi);
                 if (calc.error != "")
                 {
                     textBox1.Text = calc.error;
@@ -92,18 +102,26 @@ namespace Calculator
                 }
                 else textBox1.Text = calc.result.ToString();
                 calc.first = calc.result;
+                calc.second = calc.result;
             }
             Button b = sender as Button;
-            calc.operation = b.Text;
+            calc.operationbi = b.Text;
             calc.complete = true;
             calc.sec = false;
         }
 
         private void Equal_Click(object sender, EventArgs e)
         {
-            if (calc.operation != "")
+            if (calc.entermod == 1 && textBox1.Text.Contains(",") == true)
             {
-                calc.Bi(calc.operation);
+                while (textBox1.Text[textBox1.Text.Length - 1] == '0')
+                {
+                    textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+                }
+            }
+            if (calc.operationbi != "")
+            {
+                calc.Bi(calc.operationbi);
                 if (calc.error != "")
                 {
                     textBox1.Text = calc.error;
@@ -115,6 +133,7 @@ namespace Calculator
                 calc.complete = true;
                 calc.sec = false;
             }
+            else calc.complete = true;
         }
 
         private void CE_Click(object sender, EventArgs e)
