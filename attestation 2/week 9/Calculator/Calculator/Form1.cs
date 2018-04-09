@@ -185,5 +185,10 @@ namespace Calculator
             Clear_Memory.Enabled = true;
             calc.complete = true;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
