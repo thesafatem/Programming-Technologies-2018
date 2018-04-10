@@ -58,6 +58,8 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button22 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +67,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(-6, 53);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(985, 456);
+            this.pictureBox1.Size = new System.Drawing.Size(1024, 460);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -85,6 +87,7 @@
             // 
             // button2
             // 
+            this.button2.AutoEllipsis = true;
             this.button2.Location = new System.Drawing.Point(58, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(49, 44);
@@ -349,12 +352,28 @@
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.OldLace;
+            this.button22.Location = new System.Drawing.Point(958, 3);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(52, 44);
+            this.button22.TabIndex = 30;
+            this.button22.Text = "Open";
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
-            this.ClientSize = new System.Drawing.Size(978, 510);
+            this.ClientSize = new System.Drawing.Size(1013, 510);
+            this.Controls.Add(this.button22);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label3);
@@ -422,6 +441,8 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

@@ -84,14 +84,19 @@ namespace Paint
                 Color color = bmp.GetPixel(e.X, e.Y);
                 q.Enqueue(e.Location);
                 Point p;
+                int a, b, c, d;
                 while (q.Count != 0)
                 {
                     p = q.Dequeue();
                     bmp.SetPixel(p.X, p.Y, pen.Color);
-                    if (bmp.GetPixel(p.X + 1, p.Y) == color && !q.Contains(new Point(p.X + 1, p.Y)) && p.X + 1 != pictureBox1.Width - 1) q.Enqueue(new Point(p.X + 1, p.Y));
-                    if (bmp.GetPixel(p.X - 1, p.Y) == color && !q.Contains(new Point(p.X - 1, p.Y)) && p.X - 1 != 0) q.Enqueue(new Point(p.X - 1, p.Y));
-                    if (bmp.GetPixel(p.X, p.Y + 1) == color && !q.Contains(new Point(p.X, p.Y + 1)) && p.Y + 1 != pictureBox1.Height - 1) q.Enqueue(new Point(p.X, p.Y + 1));
-                    if (bmp.GetPixel(p.X, p.Y - 1) == color && !q.Contains(new Point(p.X, p.Y - 1)) && p.Y - 1 != 0) q.Enqueue(new Point(p.X, p.Y - 1));
+                    a = p.X + 1;
+                    b = p.X - 1;
+                    c = p.Y + 1;
+                    d = p.Y - 1;
+                    if (bmp.GetPixel(a, p.Y) == color && !q.Contains(new Point(a, p.Y)) && a != pictureBox1.Width - 1) q.Enqueue(new Point(a, p.Y));
+                    if (bmp.GetPixel(b, p.Y) == color && !q.Contains(new Point(b, p.Y)) && b != 0) q.Enqueue(new Point(b, p.Y));
+                    if (bmp.GetPixel(p.X, c) == color && !q.Contains(new Point(p.X, c)) && c != pictureBox1.Height - 1) q.Enqueue(new Point(p.X, c));
+                    if (bmp.GetPixel(p.X, d) == color && !q.Contains(new Point(p.X, d)) && d != 0) q.Enqueue(new Point(p.X, d));
                 }
                 pictureBox1.Refresh();
             }
@@ -224,6 +229,17 @@ namespace Paint
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 bmp.Save(saveFileDialog1.FileName);
+            }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                bmp = new Bitmap(openFileDialog1.FileName);
+                pictureBox1.Refresh();
+                pictureBox1.Image = bmp;
+                g = Graphics.FromImage(bmp);
             }
         }
 
