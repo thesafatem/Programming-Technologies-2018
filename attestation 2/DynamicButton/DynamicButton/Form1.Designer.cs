@@ -1,4 +1,4 @@
-﻿namespace array
+﻿namespace DynamicButton
 {
     partial class Form1
     {
@@ -34,10 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 418);
+            this.ClientSize = new System.Drawing.Size(594, 435);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
