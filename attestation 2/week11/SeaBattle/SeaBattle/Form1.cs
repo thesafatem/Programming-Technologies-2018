@@ -26,17 +26,22 @@ namespace SeaBattle
         Label[] shipnumber = new Label[4];
         Label[] sub = new Label[2];
 
+        Point p1 = new Point();
+        Point p2 = new Point();
+
+        List<Point> listofpoints = new List<Point>();
+
         bool HumanCanSet;
         bool ComputerCanSet;
+        bool HaveStriked = false;
 
         int cpukilled = 0;
         int humankilled = 0;
+        int HowMuchStriked = 0;
 
         enum PLayMode
         { position, game };
-
-        enum MoveMode
-        { human, cpu };
+        
 
         enum ShipType
         { x4, x3, x2, x1 };
@@ -47,7 +52,6 @@ namespace SeaBattle
         PLayMode playmode = PLayMode.position;
         ShipType shiptype = new ShipType();
         Direction direction = Direction.rightward;
-        MoveMode movemode = new MoveMode();
 
         public Form1()
         {
@@ -510,43 +514,14 @@ namespace SeaBattle
                         if (s == "CPU")
                         {
                             sub[0].Text = "CPU striked";
+                            HaveStriked = true;
+                            HowMuchStriked++;
                         }
                         break;
                     }
                     if (i == a + c - 1)
                     {
-                        for (int j = a; j < a + c; j++)
-                        {
-                            but[j, y].BackColor = col[j, y];
-                        }
-                        if (y - 1 >= 0)
-                        {
-                            for (int j = a; j < a + c; j++) but[j, y - 1].BackColor = col[j, y - 1];
-                            if (a - 1 >= 0)
-                            {
-                                but[a - 1, y - 1].BackColor = col[a - 1, y - 1];
-                                but[a - 1, y].BackColor = col[a - 1, y];
-                            }
-                            if (a + c <= 9)
-                            {
-                                but[a + c, y - 1].BackColor = col[a + c, y - 1];
-                                but[a + c, y].BackColor = col[a + c, y];
-                            }
-                        }
-                        if (y + 1 <= 9)
-                        {
-                            for (int j = a; j < a + c; j++) but[j, y + 1].BackColor = col[j, y + 1];
-                            if (a - 1 >= 0)
-                            {
-                                but[a - 1, y + 1].BackColor = col[a - 1, y + 1];
-                                but[a - 1, y].BackColor = col[a - 1, y];
-                            }
-                            if (a + c <= 9)
-                            {
-                                but[a + c, y + 1].BackColor = col[a + c, y + 1];
-                                but[a + c, y].BackColor = col[a + c, y];
-                            }
-                        }
+                        IfKilledToRight(but, col, a, y, c);
                         if (s == "Human")
                         {
                             sub[1].Text = "Human killed";
@@ -560,6 +535,8 @@ namespace SeaBattle
                         if (s == "CPU")
                         {
                             sub[0].Text = "CPU killed";
+                            HaveStriked = false;
+                            HowMuchStriked = 0;
                             cpukilled++;
                             if (cpukilled== 10)
                             {
@@ -583,43 +560,14 @@ namespace SeaBattle
                         if (s == "CPU")
                         {
                             sub[0].Text = "CPU striked";
+                            HaveStriked = true;
+                            HowMuchStriked++;
                         }
                         break;
                     }
                     if (i == b + c - 1)
                     {
-                        for (int j = b; j < b + c; j++)
-                        {
-                            but[x, j].BackColor = col[x, j];
-                        }
-                        if (x - 1 >= 0)
-                        {
-                            for (int j = b; j < b + c; j++) but[x - 1, j].BackColor = col[x - 1, j];
-                            if (b - 1 >= 0)
-                            {
-                                but[x, b - 1].BackColor = col[x, b - 1];
-                                but[x - 1, b - 1].BackColor = col[x - 1, b - 1];
-                            }
-                            if (b + c <= 9)
-                            {
-                                but[x, b + c].BackColor = col[x, b + c];
-                                but[x - 1, b + c].BackColor = col[x - 1, b + c];
-                            }
-                        }
-                        if (x + 1 <= 9)
-                        {
-                            for (int j = b; j < b + c; j++) but[x + 1, j].BackColor = col[x + 1, j];
-                            if (b - 1 >= 0)
-                            {
-                                but[x, b - 1].BackColor = col[x, b - 1];
-                                but[x + 1, b - 1].BackColor = col[x + 1, b - 1];
-                            }
-                            if (b + c <= 9)
-                            {
-                                but[x, b + c].BackColor = col[x, b + c];
-                                but[x + 1, b + c].BackColor = col[x + 1, b + c];
-                            }
-                        }
+                        IfKilledToDown(but, col, b, x, c);
                         if (s == "Human")
                         {
                             sub[1].Text = "Human killed";
@@ -633,6 +581,8 @@ namespace SeaBattle
                         if (s == "CPU")
                         {
                             sub[0].Text = "CPU killed";
+                            HaveStriked = false;
+                            HowMuchStriked = 0;
                             cpukilled++;
                             if (cpukilled == 10)
                             {
@@ -645,28 +595,309 @@ namespace SeaBattle
             }
         }
 
+        public void IfKilledToRight(Button[,] but, Color[,] col, int a, int y, int c)
+        {
+            for (int j = a; j < a + c; j++)
+            {
+                but[j, y].BackColor = col[j, y];
+            }
+            if (y - 1 >= 0)
+            {
+                for (int j = a; j < a + c; j++) but[j, y - 1].BackColor = col[j, y - 1];
+                if (a - 1 >= 0)
+                {
+                    but[a - 1, y - 1].BackColor = col[a - 1, y - 1];
+                    but[a - 1, y].BackColor = col[a - 1, y];
+                }
+                if (a + c <= 9)
+                {
+                    but[a + c, y - 1].BackColor = col[a + c, y - 1];
+                    but[a + c, y].BackColor = col[a + c, y];
+                }
+            }
+            if (y + 1 <= 9)
+            {
+                for (int j = a; j < a + c; j++) but[j, y + 1].BackColor = col[j, y + 1];
+                if (a - 1 >= 0)
+                {
+                    but[a - 1, y + 1].BackColor = col[a - 1, y + 1];
+                    but[a - 1, y].BackColor = col[a - 1, y];
+                }
+                if (a + c <= 9)
+                {
+                    but[a + c, y + 1].BackColor = col[a + c, y + 1];
+                    but[a + c, y].BackColor = col[a + c, y];
+                }
+            }
+        }
+
+        public void IfKilledToDown(Button[,] but, Color [,] col, int b, int x, int c)
+        {
+            for (int j = b; j < b + c; j++)
+            {
+                but[x, j].BackColor = col[x, j];
+            }
+            if (x - 1 >= 0)
+            {
+                for (int j = b; j < b + c; j++) but[x - 1, j].BackColor = col[x - 1, j];
+                if (b - 1 >= 0)
+                {
+                    but[x, b - 1].BackColor = col[x, b - 1];
+                    but[x - 1, b - 1].BackColor = col[x - 1, b - 1];
+                }
+                if (b + c <= 9)
+                {
+                    but[x, b + c].BackColor = col[x, b + c];
+                    but[x - 1, b + c].BackColor = col[x - 1, b + c];
+                }
+            }
+            if (x + 1 <= 9)
+            {
+                for (int j = b; j < b + c; j++) but[x + 1, j].BackColor = col[x + 1, j];
+                if (b - 1 >= 0)
+                {
+                    but[x, b - 1].BackColor = col[x, b - 1];
+                    but[x + 1, b - 1].BackColor = col[x + 1, b - 1];
+                }
+                if (b + c <= 9)
+                {
+                    but[x, b + c].BackColor = col[x, b + c];
+                    but[x + 1, b + c].BackColor = col[x + 1, b + c];
+                }
+            }
+        }
+
         public void CPUStrikes()
         {
-            bool CPUmove = true;
-            while (CPUmove)
+            bool pose = true;
+            while (pose)
             {
-                Random k = new Random();
-                int x = k.Next(0, 9);
-                int y = k.Next(0, 9);
-                if (humanfield[x, y].BackColor != Color.Lavender) continue;
-                else
+                listofpoints.Clear();
+                int q = 0;
+                for (int i = 0; i < 9; i++)
                 {
-                    if (humanfieldcolor[x, y] == Color.LightSeaGreen)
+                    for (int j = 0; j < 9; j++)
                     {
-                        humanfield[x, y].BackColor = humanfieldcolor[x, y];
-                        CPUmove = false;
-                        movemode = MoveMode.human;
-                        sub[0].Text = "CPU missed";
+                        if (humanfield[i, j].BackColor == Color.LightSalmon)
+                        {
+                            q++;
+                            if (q == 1)
+                            {
+                                p1 = new Point(i, j);
+                            }
+                            p2 = new Point(i, j);
+                        }
+                    }
+                }
+                if (HowMuchStriked == 1)
+                {
+                    if (p1.X - 1 >= 0)
+                    {
+                        if (humanfield[p1.X - 1, p1.Y].BackColor == Color.Lavender)
+                        {
+                            listofpoints.Add(new Point(p1.X - 1, p1.Y));
+                        }
+                    }
+                    if (p2.X + 1 <= 9)
+                    {
+                        if (humanfield[p2.X + 1, p1.Y].BackColor == Color.Lavender)
+                        {
+                            listofpoints.Add(new Point(p2.X + 1, p1.Y));
+                        }
+                    }
+                    if (p1.Y - 1 >= 0)
+                    {
+                        if (humanfield[p1.X, p1.Y - 1].BackColor == Color.Lavender)
+                        {
+                            listofpoints.Add(new Point(p1.X, p1.Y - 1));
+                        }
+                    }
+                    if (p2.Y + 1 <= 9)
+                    {
+                        if (humanfield[p1.X, p2.Y + 1].BackColor == Color.Lavender)
+                        {
+                            listofpoints.Add(new Point(p1.X, p2.Y + 1));
+                        }
+                    }
+                    Random k = new Random();
+                    int ran = k.Next(0, listofpoints.Count) % (listofpoints.Count + 1);
+                    if (humanfieldcolor[listofpoints[ran].X, listofpoints[ran].Y] == Color.Peru)
+                    {
+                        if (humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10 == 2)
+                        {
+                            int a = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 1000;
+                            int b = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 100 % 10;
+                            int c = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10;
+                            int d = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] % 10;
+                            int x = listofpoints[ran].X;
+                            int y = listofpoints[ran].Y;
+                            if (d == 1)
+                            {
+                                IfKilledToRight(humanfield, humanfieldcolor, a, y, c);
+                            }
+                            if (d == 2)
+                            {
+                                IfKilledToDown(humanfield, humanfieldcolor, b, x, c);
+                            }
+                            HowMuchStriked = 0;
+                            cpukilled++;
+                            sub[0].Text = "CPU killed";
+                            continue;
+                        }
+                        else
+                        {
+                            humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSalmon;
+                            HowMuchStriked++;
+                            sub[0].Text = "CPU striked";
+                            continue;
+                        }
                     }
                     else
                     {
-                        StrikingFuction(humanfield, humanfieldcolor, humanfieldships, x, y, "CPU");
+                        humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSeaGreen;
+                        pose = false;
+                        break;
                     }
+                }
+                else if (HowMuchStriked > 1)
+                {
+                    if (p1.Y == p2.Y)
+                    {
+                        if (p1.X - 1 >= 0)
+                        {
+                            if (humanfield[p1.X - 1, p1.Y].BackColor == Color.Lavender)
+                            {
+                                listofpoints.Add(new Point(p1.X - 1, p1.Y));
+                            }
+                        }
+                        if (p2.X + 1 <= 9)
+                        {
+                            if (humanfield[p2.X + 1, p1.Y].BackColor == Color.Lavender)
+                            {
+                                listofpoints.Add(new Point(p2.X + 1, p1.Y));
+                            }
+                        }
+                        Random k = new Random();
+                        int ran = k.Next(0, listofpoints.Count) % (listofpoints.Count + 1);
+                        if (humanfieldcolor[listofpoints[ran].X, listofpoints[ran].Y] == Color.Peru)
+                        {
+                            if (humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10 == HowMuchStriked + 1)
+                            {
+                                int a = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 1000;
+                                int b = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 100 % 10;
+                                int c = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10;
+                                int d = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] % 10;
+                                int x = listofpoints[ran].X;
+                                int y = listofpoints[ran].Y;
+                                IfKilledToRight(humanfield, humanfieldcolor, a, y, c);
+                                HowMuchStriked = 0;
+                                cpukilled++;
+                                sub[0].Text = "CPU killed";
+                                continue;
+                            }
+                            else
+                            {
+                                humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSalmon;
+                                HowMuchStriked++;
+                                sub[0].Text = "CPU striked";
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSeaGreen;
+                            pose = false;
+                            sub[0].Text = "CPU missed";
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (p1.Y - 1 >= 0)
+                        {
+                            if (humanfield[p1.X, p1.Y - 1].BackColor == Color.Lavender)
+                            {
+                                listofpoints.Add(new Point(p1.X, p1.Y - 1));
+                            }
+                        }
+                        if (p2.Y + 1 <= 9)
+                        {
+                            if (humanfield[p1.X, p2.Y + 1].BackColor == Color.Lavender)
+                            {
+                                listofpoints.Add(new Point(p1.X, p2.Y + 1));
+                            }
+                        }
+                        Random k = new Random();
+                        int ran = k.Next(0, listofpoints.Count) % (listofpoints.Count + 1);
+                        if (humanfieldcolor[listofpoints[ran].X, listofpoints[ran].Y] == Color.Peru)
+                        {
+                            if (humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10 == HowMuchStriked + 1)
+                            {
+                                int a = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 1000;
+                                int b = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 100 % 10;
+                                int c = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] / 10 % 10;
+                                int d = humanfieldships[listofpoints[ran].X, listofpoints[ran].Y] % 10;
+                                int x = listofpoints[ran].X;
+                                int y = listofpoints[ran].Y;
+                                IfKilledToDown(humanfield, humanfieldcolor, b, x, c);
+                                HowMuchStriked = 0;
+                                cpukilled++;
+                                sub[0].Text = "CPU killed";
+                                continue;
+                            }
+                            else
+                            {
+                                humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSalmon;
+                                HowMuchStriked++;
+                                sub[0].Text = "CPU striked";
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSeaGreen;
+                            pose = false;
+                            sub[0].Text = "CPU missed";
+                            break;
+                        }
+                    }
+                }
+                else if (HowMuchStriked == 0)
+                {
+                    Random k = new Random();
+                    int x = k.Next(0, 9);
+                    int y = k.Next(0, 9);
+                    if (humanfield[x, y].BackColor != Color.Lavender) continue;
+                    else
+                    {
+                        if (humanfieldcolor[x, y] == Color.Peru)
+                        {
+                            if (humanfieldships[x, y] / 10 % 10 == 1)
+                            {
+                                humanfield[x, y].BackColor = humanfieldcolor[x, y];
+                                IfKilledToRight(humanfield, humanfieldcolor, x, y, 1);
+                                cpukilled++;
+                                sub[0].Text = "CPU killed";
+                            }
+                            else
+                            {
+                                humanfield[x, y].BackColor = Color.LightSalmon;
+                                HowMuchStriked++;
+                                sub[0].Text = "CPU striked";
+                            }
+                        }
+                        else
+                        {
+                            humanfield[x, y].BackColor = Color.LightSeaGreen;
+                            sub[0].Text = "CPU missed";
+                            pose = false;
+                        }
+                    }
+                }
+                if (cpukilled == 10)
+                {
+                    sub[0].Text = "CPU wins";
+                    sub[1].Text = "Human wins";
                 }
             }
         }
@@ -688,17 +919,12 @@ namespace SeaBattle
                         {
                             cpufield[x, y].BackColor = cpufieldcolor[x, y];
                             HumanMove = false;
-                            movemode = MoveMode.cpu;
                             sub[1].Text = "Human missed";
                             CPUStrikes();
                         }
                         else
                         {
                             StrikingFuction(cpufield, cpufieldcolor, cpufieldships, x, y, "Human");
-                            if (humankilled == 10)
-                            {
-
-                            }
                         }
                     }
                 }
