@@ -511,12 +511,7 @@ namespace SeaBattle
                         {
                             sub[1].Text = "Human striked";
                         }
-                        if (s == "CPU")
-                        {
-                            sub[0].Text = "CPU striked";
-                            HaveStriked = true;
-                            HowMuchStriked++;
-                        }
+                        
                         break;
                     }
                     if (i == a + c - 1)
@@ -532,18 +527,6 @@ namespace SeaBattle
                                 sub[0].Text = "CPU lose";
                             }
                         }
-                        if (s == "CPU")
-                        {
-                            sub[0].Text = "CPU killed";
-                            HaveStriked = false;
-                            HowMuchStriked = 0;
-                            cpukilled++;
-                            if (cpukilled== 10)
-                            {
-                                sub[1].Text = "Human lose";
-                                sub[0].Text = "CPU wins";
-                            }
-                        }
                     }
                 }
             }
@@ -556,12 +539,6 @@ namespace SeaBattle
                         if (s == "Human")
                         {
                             sub[1].Text = "Human striked";
-                        }
-                        if (s == "CPU")
-                        {
-                            sub[0].Text = "CPU striked";
-                            HaveStriked = true;
-                            HowMuchStriked++;
                         }
                         break;
                     }
@@ -576,18 +553,6 @@ namespace SeaBattle
                             {
                                 sub[1].Text = "Human wins";
                                 sub[0].Text = "CPU lose";
-                            }
-                        }
-                        if (s == "CPU")
-                        {
-                            sub[0].Text = "CPU killed";
-                            HaveStriked = false;
-                            HowMuchStriked = 0;
-                            cpukilled++;
-                            if (cpukilled == 10)
-                            {
-                                sub[1].Text = "Human lose";
-                                sub[0].Text = "CPU wins";
                             }
                         }
                     }
@@ -756,6 +721,7 @@ namespace SeaBattle
                     {
                         humanfield[listofpoints[ran].X, listofpoints[ran].Y].BackColor = Color.LightSeaGreen;
                         pose = false;
+                        sub[0].Text = "CPU missed";
                         break;
                     }
                 }
@@ -867,7 +833,23 @@ namespace SeaBattle
                     Random k = new Random();
                     int x = k.Next(0, 9);
                     int y = k.Next(0, 9);
-                    if (humanfield[x, y].BackColor != Color.Lavender) continue;
+                    if (humanfield[x, y].BackColor != Color.Lavender)
+                    {
+                        if (cpukilled >= 7)
+                        {
+                            for (int i = 0; i < 9; i++)
+                            {
+                                for (int j = 0; j < 9; j++)
+                                {
+                                    if (humanfield[i, j].BackColor == Color.Lavender)
+                                    {
+                                        x = i;
+                                        y = j;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     else
                     {
                         if (humanfieldcolor[x, y] == Color.Peru)
@@ -897,7 +879,7 @@ namespace SeaBattle
                 if (cpukilled == 10)
                 {
                     sub[0].Text = "CPU wins";
-                    sub[1].Text = "Human wins";
+                    sub[1].Text = "Human lose";
                 }
             }
         }
