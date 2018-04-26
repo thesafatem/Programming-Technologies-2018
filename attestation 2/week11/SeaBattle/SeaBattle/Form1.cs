@@ -14,31 +14,31 @@ namespace SeaBattle
 {
     public partial class Form1 : Form
     {
-        Button[,] humanfield = new Button[10, 10];
-        Button[,] cpufield = new Button[10, 10];
-        Color[,] humanfieldcolor = new Color[10, 10];
-        Color[,] cpufieldcolor = new Color[10, 10];
-        int[,] humanfieldships = new int[10, 10];
-        int[,] cpufieldships = new int[10, 10];
-        bool[,] humanfieldcanset = new bool[10, 10];
-        bool[,] cpufieldcanset = new bool[10, 10];
-        Button[] shipchoice = new Button[6];
-        Label[] shipnumber = new Label[4];
-        Label[] sub = new Label[2];
+        Button[,] humanfield;
+        Button[,] cpufield;
+        Color[,] humanfieldcolor;
+        Color[,] cpufieldcolor;
+        int[,] humanfieldships;
+        int[,] cpufieldships;
+        int [,] humanfieldcanset;
+        bool[,] cpufieldcanset;
+        Button[] shipchoice;
+        Label[] shipnumber;
+        Label[] sub;
 
-        Point p1 = new Point();
-        Point p2 = new Point();
+        Point p1;
+        Point p2;
 
-        List<Point> listofpoints = new List<Point>();
-        List<Button> allpoints = new List<Button>();
+        List<Point> listofpoints;
+        List<Button> allpoints;
 
         bool HumanCanSet;
-        bool CPUCanMove = false;
-        bool HumanMove = true;
+        bool CPUCanMove;
+        bool HumanMove;
 
-        int cpukilled = 0;
-        int humankilled = 0;
-        int HowMuchStriked = 0;
+        int cpukilled;
+        int humankilled;
+        int HowMuchStriked;
 
         enum PLayMode
         { position, game, gameover };
@@ -50,13 +50,48 @@ namespace SeaBattle
         enum Direction
         { downward, rightward };
 
-        PLayMode playmode = PLayMode.position;
-        ShipType shiptype = new ShipType();
-        Direction direction = Direction.rightward;
+        PLayMode playmode;
+        ShipType shiptype;
+        Direction direction;
 
         public Form1()
         {
             InitializeComponent();
+            NewGame();
+        }
+
+        public void NewGame()
+        {
+            humanfield = new Button[10, 10];
+            cpufield = new Button[10, 10];
+            humanfieldcolor = new Color[10, 10];
+            cpufieldcolor = new Color[10, 10];
+            humanfieldships = new int[10, 10];
+            cpufieldships = new int[10, 10];
+            humanfieldcanset = new int[10, 10];
+            cpufieldcanset = new bool[10, 10];
+            shipchoice = new Button[6];
+            shipnumber = new Label[4];
+            sub = new Label[2];
+
+            p1 = new Point();
+            p2 = new Point();
+
+            listofpoints = new List<Point>();
+            allpoints = new List<Button>();
+
+            HumanCanSet = true;
+            CPUCanMove = false;
+            HumanMove = true;
+
+            cpukilled = 0;
+            humankilled = 0;
+            HowMuchStriked = 0;
+
+            playmode = PLayMode.position;
+            shiptype = new ShipType();
+            direction = Direction.rightward;
+
             CreateHumanfield();
             CreateCPUfield();
             ShowShipTypes();
@@ -73,13 +108,13 @@ namespace SeaBattle
                     b.Size = new Size(30, 30);
                     b.Location = new Point(30 + 30 * i, 30 + 30 * j);
                     b.BackColor = Color.LightSeaGreen;
-                    b.Click += new System.EventHandler(humanfield_Click);
+                    b.MouseDown += new System.Windows.Forms.MouseEventHandler(humanfield_Click);
                     b.MouseEnter += new System.EventHandler(humanfield_Enter);
                     b.MouseLeave += new System.EventHandler(humanfield_Leave);
                     Controls.Add(b);
                     humanfield[i, j] = b;
                     humanfieldcolor[i, j] = Color.LightSeaGreen;
-                    humanfieldcanset[i, j] = true;
+                    humanfieldcanset[i, j] = 0;
                     allpoints.Add(humanfield[i, j]);
                 }
             }
@@ -119,7 +154,7 @@ namespace SeaBattle
                 {
                     if (k < 10)
                     {
-                        if (humanfieldcanset[k, j] == false)
+                        if (humanfieldcanset[k, j] > 0)
                         {
                             HumanCanSet = false;
                         }
@@ -144,7 +179,7 @@ namespace SeaBattle
                 {
                     if (k < 10)
                     {
-                        if (humanfieldcanset[i, k] == false)
+                        if (humanfieldcanset[i, k] > 0)
                         {
                             HumanCanSet = false;
                         }
@@ -164,7 +199,7 @@ namespace SeaBattle
             }
         }
 
-        public void ForHumanField_Click(int i, int j, int f)
+        public void ForHumanField_LeftClick(int i, int j, int f)
         {
             if (shipchoice[4 - f].Enabled == true && humanfield[i, j].BackColor == Color.LightGreen)
             {
@@ -188,7 +223,7 @@ namespace SeaBattle
                 {
                     for (int b = j - 1; b <= j + 1; b++)
                     {
-                        if (a >= 0 && a <= 9 && b >= 0 && b <= 9) humanfieldcanset[a, b] = false;
+                        if (a >= 0 && a <= 9 && b >= 0 && b <= 9) humanfieldcanset[a, b]++;
                     }
                 }
             }
@@ -204,9 +239,84 @@ namespace SeaBattle
                 {
                     for (int b = j - 1; b <= j + f; b++)
                     {
-                        if (a >= 0 && a <= 9 && b >= 0 && b <= 9) humanfieldcanset[a, b] = false;
+                        if (a >= 0 && a <= 9 && b >= 0 && b <= 9) humanfieldcanset[a, b]++;
                     }
                 }
+            }
+        }
+
+        public void ForHumanField_RightClick(int i, int j)
+        {
+            if (humanfieldcolor[i, j] == Color.Peru)
+            {
+                int a = humanfieldships[i, j] / 1000;
+                int b = humanfieldships[i, j] / 100 % 10;
+                int f = humanfieldships[i, j] / 10 % 10;
+                int dir = humanfieldships[i, j] % 10;
+                switch (f)
+                {
+                    case 1:
+                        shiptype = ShipType.x1;
+                        shipnumber[3].Text = (int.Parse(shipnumber[3].Text) + 1).ToString();
+                        shipchoice[3].Enabled = true;
+                        break;
+                    case 2:
+                        shiptype = ShipType.x2;
+                        shipnumber[2].Text = (int.Parse(shipnumber[2].Text) + 1).ToString();
+                        shipchoice[2].Enabled = true;
+                        break;
+                    case 3:
+                        shiptype = ShipType.x3;
+                        shipnumber[1].Text = (int.Parse(shipnumber[1].Text) + 1).ToString();
+                        shipchoice[1].Enabled = true;
+                        break;
+                    case 4:
+                        shiptype = ShipType.x4;
+                        shipnumber[0].Text = (int.Parse(shipnumber[0].Text) + 1).ToString();
+                        shipchoice[0].Enabled = true;
+                        break;
+                }
+                if (dir == 1)
+                {
+                    direction = Direction.rightward;
+                    shipchoice[4].Text = "rightward";
+                    for (int k = a; k < a + f; k++)
+                    {
+                        humanfieldcolor[k, j] = Color.LightSeaGreen;
+                    }
+                    for (int k = a - 1; k <= a + f; k++)
+                    {
+                        for (int l = j - 1; l <= j + 1; l++)
+                        {
+                            if (k >= 0 && k < 10 && l >= 0 && l < 10) humanfieldcanset[k, l]--;
+                        }
+                    }
+                }
+                else
+                {
+                    direction = Direction.downward;
+                    shipchoice[4].Text = "downward";
+                    for (int k = b; k < b + f; k++)
+                    {
+                        humanfieldcolor[i, k] = Color.LightSeaGreen;
+                    }
+                    for (int k = a - 1; k <= a + 1; k++)
+                    {
+                        for (int l = j - 1; l <= j + f; l++)
+                        {
+                            if (k >= 0 && k < 10 && l >= 0 && l < 10) humanfieldcanset[k, l]--;
+                        }
+                    }
+                }
+                for (int k = 0; k < 10; k++)
+                {
+                    for (int l = 0; l < 10; l++)
+                    {
+                        humanfield[k, l].BackColor = humanfieldcolor[k, l];
+                    }
+                }
+                HumanCanSet = true;
+                ForHumanField_Enter(i, j, f);
             }
         }
 
@@ -260,27 +370,34 @@ namespace SeaBattle
             }
         }
 
-        public void humanfield_Click(object sender, EventArgs e)
+        public void humanfield_Click(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
             int i = b.Location.X / 30 - 1;
             int j = b.Location.Y / 30 - 1;
-            if (playmode == PLayMode.position && HumanCanSet == true)
+            if (playmode == PLayMode.position)
             {
-                switch (shiptype)
+                if (e.Button == MouseButtons.Left && HumanCanSet == true)
                 {
-                    case ShipType.x1:
-                        ForHumanField_Click(i, j, 1);
-                        break;
-                    case ShipType.x2:
-                        ForHumanField_Click(i, j, 2);
-                        break;
-                    case ShipType.x3:
-                        ForHumanField_Click(i, j, 3);
-                        break;
-                    case ShipType.x4:
-                        ForHumanField_Click(i, j, 4);
-                        break;
+                    switch (shiptype)
+                    {
+                        case ShipType.x1:
+                            ForHumanField_LeftClick(i, j, 1);
+                            break;
+                        case ShipType.x2:
+                            ForHumanField_LeftClick(i, j, 2);
+                            break;
+                        case ShipType.x3:
+                            ForHumanField_LeftClick(i, j, 3);
+                            break;
+                        case ShipType.x4:
+                            ForHumanField_LeftClick(i, j, 4);
+                            break;
+                    }
+                }
+                if (e.Button == MouseButtons.Right)
+                {
+                    ForHumanField_RightClick(i, j);
                 }
             }
         }
@@ -632,7 +749,7 @@ namespace SeaBattle
                 for (int j = b; j < b + c; j++)
                 {
                     but[x + 1, j].BackColor = col[x + 1, j];
-                    if (but[x + 1, j].Location.X < 400) allpoints.Remove(but[x - 1, j]);
+                    if (but[x + 1, j].Location.X < 400) allpoints.Remove(but[x + 1, j]);
                 }
                 if (b - 1 >= 0)
                 {
@@ -948,8 +1065,32 @@ namespace SeaBattle
                 if (i == 0) l.BackColor = Color.White;
                 else l.BackColor = Color.LightGreen;
                 l.TextAlign = ContentAlignment.MiddleCenter;
+                l.Click += new System.EventHandler(Label_Click);
                 Controls.Add(l);
                 sub[i] = l;
+            }
+        }
+
+        public void HideEndPosition()
+        {
+            sub[0].Hide();
+            sub[1].Hide();
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    humanfield[i, j].Hide();
+                    cpufield[i, j].Hide();
+                }
+            }
+        }
+
+        public void Label_Click(object sender, EventArgs e)
+        {
+            if ((sub[0].BackColor == Color.LightGreen && sub[1].BackColor == Color.LightSalmon) || (sub[0].BackColor == Color.LightSalmon && sub[1].BackColor == Color.LightGreen))
+            {
+                HideEndPosition();
+                NewGame();
             }
         }
 
